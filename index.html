@@ -243,12 +243,12 @@ select:focus{border-color:#3b82f6}
     <label style="margin-left:20px">工厂</label>
     <select id="sel-factory" onchange="renderMonthly()">
       <option value="">全部工厂</option>
-      <option value="AITK">🇹🇷 AITK · Turkey</option>
-      <option value="AIMX">🇲🇽 AIMX · Mexico</option>
-      <option value="AIUS">🇺🇸 AIUS · US</option>
-      <option value="AISH">🇨🇳 AISH · Shanghai</option>
-      <option value="AITH">🇹🇭 AITH · Thailand</option>
-      <option value="AISK">🇸🇰 AISK · Slovakia</option>
+      <option value="AITK">AITK · Turkey</option>
+      <option value="AIMX">AIMX · Mexico</option>
+      <option value="AIUS">AIUS · United States</option>
+      <option value="AISH">AISH · Shanghai</option>
+      <option value="AITH">AITH · Thailand</option>
+      <option value="AISK">AISK · Slovakia</option>
     </select>
   </div>
   <div id="monthly-content"></div>
@@ -319,7 +319,7 @@ function initOverview() {
     const trend = IDX_2026.map(i=>fullTrend[i]);
     const color = F_COLORS[fid];
     return {
-      label: fid+' '+DATA[fid].flag,
+      label: fid,
       data: trend,
       borderColor: color, backgroundColor: color+'18',
       borderWidth: 2.5,
