@@ -1,0 +1,37 @@
+name: Update Dashboard
+
+on:
+  push:
+    paths:
+      - 'data/**.xlsx'   # 只要 Excel 文件有变化就触发
+  workflow_dispatch:      # 也可手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Extract data from Excel
+        run: python scripts/gen_v4.py
+
+      - name: Generate index.html
+        run: python scripts/gen_v7.py
+
+      - name: Commit and push updated dashboard
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html scripts/data_v4.json
+          git diff --staged --quiet || git commit -m "Auto-update dashboard from Excel [skip ci]"
+          git push
